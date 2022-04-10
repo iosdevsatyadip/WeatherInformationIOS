@@ -37,4 +37,4 @@ $ git clone https://github.com/satyadipios/WeatherInformation.git
   
 
 ## Notes 
-Weather application has been tested in iPhone simulator (iOS 15.2) and not tested in real device. 
+WeatherInformation application is tested in iPhone simulator (iOS 15.2) portrait mode only and not tested in real device. 
