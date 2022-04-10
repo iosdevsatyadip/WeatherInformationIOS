@@ -19,7 +19,7 @@ $ git clone https://github.com/satyadipios/WeatherInformation.git
 
 2) Open the application in Xcode and run in iOS 15+ devices (iPhone) ( Install pods if there is any error to run the application otherwise there is no need to install pods)
 
-## Swift Features implemented 
+## Key Swift Features  
 * Test-driven development 
 * MVVM design pattern 
 * Network call (Async/await)
