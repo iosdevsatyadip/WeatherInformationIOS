@@ -11,8 +11,8 @@ import UIKit
 
 class WeatherCell: UITableViewCell {
     
-    @IBOutlet weak var cityNameLabel: UILabel!
-    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak private var cityNameLabel: UILabel!
+    @IBOutlet weak private var temperatureLabel: UILabel!
     
     //MARK:- Updating weather cell 
     

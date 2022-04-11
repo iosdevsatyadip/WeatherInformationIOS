@@ -142,6 +142,7 @@
 		8D1307A221B31A15000DFB56 /* WeatherInformation */ = {
 			isa = PBXGroup;
 			children = (
+				BB54B7D028045B25001B263A /* Screens */,
 				E0664E3D28014DB700B69872 /* Network */,
 				8D5F0FB625F162320057F0A1 /* Extensions */,
 				8D5F0FB125F161F10057F0A1 /* Utils */,
@@ -150,9 +151,7 @@
 				8D5D959E21B336EB008DC2C2 /* Custom Cells */,
 				8D5D959921B31D23008DC2C2 /* Controllers */,
 				8D1307A321B31A15000DFB56 /* AppDelegate.swift */,
-				8D1307A721B31A15000DFB56 /* Main.storyboard */,
 				8D1307AA21B31A16000DFB56 /* Assets.xcassets */,
-				8D1307AC21B31A16000DFB56 /* LaunchScreen.storyboard */,
 				8D1307AF21B31A16000DFB56 /* Info.plist */,
 			);
 			path = WeatherInformation;
@@ -225,6 +224,15 @@
 				BB6EA61727FD5D3B005C8BA4 /* WeatherListViewModelTest.swift */,
 			);
 			path = WeatherInformationTests;
+			sourceTree = "<group>";
+		};
+		BB54B7D028045B25001B263A /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8D1307A721B31A15000DFB56 /* Main.storyboard */,
+				8D1307AC21B31A16000DFB56 /* LaunchScreen.storyboard */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		BB7DE02327FEFC1200CA0F78 /* WeatherInformationUITests */ = {

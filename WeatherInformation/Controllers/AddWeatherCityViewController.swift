@@ -17,7 +17,7 @@ protocol AddWeatherDelegate {
 
 class AddWeatherCityViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var cityNameTextField: UITextField!
+    @IBOutlet weak private var cityNameTextField: UITextField!
     private var weatherService = WeatherService()
     var delegate: AddWeatherDelegate?
     var reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.google.com")

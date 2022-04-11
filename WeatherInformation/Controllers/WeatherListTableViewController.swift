@@ -85,8 +85,8 @@ extension WeatherListTableViewController: SettingsDelegate {
     func settingsDone(vm: SettingsViewModel) {
         if lastUnitSelection.rawValue != vm.selectedUnit.rawValue {
             weatherListViewModel.updateUnit(to: vm.selectedUnit)
-            tableView.reloadData()
             lastUnitSelection = Unit(rawValue: vm.selectedUnit.rawValue) ?? Unit.fahrenheit
+            tableView.reloadData()
         }
     }
 }
