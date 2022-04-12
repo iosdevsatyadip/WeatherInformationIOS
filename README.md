@@ -2,7 +2,7 @@
 
 **WeatherInformation** is a simple iPhone application which allows user to input city as per choice and App will display current temperature of that city. By default app will display temperature in Fahrenheit and user can also chagne mode of temperature from settings screen. Used **OpenWeatherMap** API to get current weather information. 
 
-WeatherInformation Application has been developed in Swift 5, following MVVM design pattern and Test-driven development approach. Code coverage is more than 90%. Below screenshots shows Application structure and testcase results. 
+WeatherInformation Application has been developed in Swift 5, following MVVM design pattern and Test-driven development approach. Code coverage is more than 92%. Below screenshots shows Application structure and testcase results. 
 
 <img width="943" alt="Code-coverageAndAppStructure" src="https://user-images.githubusercontent.com/103358766/162612049-928dbacb-d20c-4171-a135-67cd37102bde.png">
  
@@ -15,25 +15,28 @@ WeatherInformation Application has been developed in Swift 5, following MVVM des
 ## How to build
 
 1) Clone the repository
-$ git clone https://github.com/satyadipios/WeatherInformation.git
-
-2) Open the application in Xcode and run in iOS 15+ devices (iPhone) ( Install pods if there is any error to run the application otherwise there is no need to install pods)
+$ git clone https://github.com/iosdevsatyadip/WeatherInformationIOS.git
+2) Open Terminal and move to project location by cd command 
+3) install pod 
+5) After successfully pod install  open **WeatherInformation.xcworkspace** file and run iPhone device / simulator (iOS 15 onwards)
 
 ## Key Swift Features  
 * Test-driven development 
 * MVVM design pattern 
-* Network call (Async/await)
+* Network call 
+* Network Reachability
 * Protocol-Oriented Programming 
 * Dependency Injection
-* Alamofire
+* Swiftlint
 * Unit Tests
 * UI Tests
 * Storyboard 
 
 ## Pods 
 
-  * pod 'MBProgressHUD'
-  * pod 'Alamofire'
+* pod 'MBProgressHUD'
+* pod 'ReachabilitySwift'
+* pod 'SwiftLint'
   
 
 ## Notes 
