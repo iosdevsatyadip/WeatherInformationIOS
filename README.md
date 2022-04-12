@@ -4,7 +4,8 @@
 
 WeatherInformation Application has been developed in Swift 5, following MVVM design pattern and Test-driven development approach.  Used **OpenWeatherMap** API to get current weather information. Below screenshots shows Application structure and testcase results. 
 
-<img width="870" alt="Screenshot 2022-04-12 at 9 23 58 PM" src="https://user-images.githubusercontent.com/103521381/163004930-1d0596e1-a0b0-43ba-9fba-25ada90d8248.png">
+
+<img width="1135" alt="Screenshot 2022-04-12 at 9 40 59 PM" src="https://user-images.githubusercontent.com/103521381/163006864-08b9cb8b-2958-4121-8ad3-ae289d453499.png">
 
  
 ## Supported version
