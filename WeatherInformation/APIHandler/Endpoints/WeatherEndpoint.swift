@@ -12,7 +12,7 @@ extension WeatherEndpoint: Endpoint {
     var path: String {
         switch self {
         case .weather(city: let city, units: let units, appID: let appid):
-            return "weather?q=\(city.escaped())&appid=\(appid)&units=\(units)"
+            return "weather?q=\(city)&appid=\(appid)&units=\(units)"
         }
     }
     
@@ -25,13 +25,6 @@ extension WeatherEndpoint: Endpoint {
     
     var header: [String: String]? {
         // Access Token to use in Bearer header
-        switch self {
-        case .weather:
-            return nil
-        }
-    }
-    
-    var body: [String: String]? {
         switch self {
         case .weather:
             return nil

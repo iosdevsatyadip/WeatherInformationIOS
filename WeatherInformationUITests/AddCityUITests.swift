@@ -9,9 +9,10 @@
 import XCTest
 
 class AddCityUITests: XCTestCase {
-    private var app : XCUIApplication!
+    
+    private var app: XCUIApplication!
     private var contentViewPage: ContentViewPage!
-    var timer : Timer!
+    var timer: Timer!
     
     override func setUp() {
         app = XCUIApplication()
@@ -20,42 +21,48 @@ class AddCityUITests: XCTestCase {
         timer = Timer()
         app.launch()
     }
-        
-    func testSavingAfterEnteringWrongInputShouldNavigatePreviousScreen()  {
-
-        contentViewPage.add_navigation_bar.tap()
+    func testSavingAfterEnteringWrongInputShouldNavigatePreviousScreen() {
+        contentViewPage.addNavigationBar.tap()
         contentViewPage.cityTextField.tap()
         contentViewPage.cityTextField.tap()
         contentViewPage.cityTextField.typeText("Londonnnnn") // Checking with wrong city name
-        let saveButton = contentViewPage.btn_save
+        let saveButton = contentViewPage.btnSave
         saveButton.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.addCity_Navigation_bar.exists)
+        XCTAssert(contentViewPage.addCityNavigationBar.exists)
     }
     
-    func testSavingAfterEnteringCorrectInputShouldNavigatePreviousScreen()  {
-
-        contentViewPage.add_navigation_bar.tap()
+    func testSavingAfterEnteringCorrectInputShouldNavigatePreviousScreen() {
+        contentViewPage.addNavigationBar.tap()
         contentViewPage.cityTextField.tap()
         contentViewPage.cityTextField.typeText("London") // Checking with correct city name
-        contentViewPage.btn_save.tap()
+        contentViewPage.btnSave.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.launch_Navigation_bar.exists)
+        XCTAssert(contentViewPage.launchNavigationBar.exists)
     }
     
     func testCloseButtonPressShouldNavigatePreviusScreen() {
-        contentViewPage.add_navigation_bar.tap()
+        contentViewPage.addNavigationBar.tap()
         timer.wait(for: 0.5)
-        contentViewPage.btn_close.tap()
+        contentViewPage.btnClose.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.launch_Navigation_bar.exists)
+        XCTAssert(contentViewPage.launchNavigationBar.exists)
     }
     
     func testAlertAvailabilityviewForWrongCityInput() {
-        contentViewPage.add_navigation_bar.tap()
+        contentViewPage.addNavigationBar.tap()
         contentViewPage.cityTextField.tap()
-        contentViewPage.cityTextField.typeText("Londonsss") // Checking with correct city name
-        contentViewPage.btn_save.tap()
+        contentViewPage.cityTextField.typeText("Londonsss") // Checking with wrong city name
+        contentViewPage.btnSave.tap()
+        timer.wait(for: 2)
+        XCTAssert(app.alerts.element.exists)
+    }
+    
+    func testAlertWhenEnteredCityNIsBlank() {
+        contentViewPage.addNavigationBar.tap()
+        contentViewPage.cityTextField.tap()
+        contentViewPage.cityTextField.typeText("") // Checking with blank city name
+        contentViewPage.btnSave.tap()
         timer.wait(for: 2)
         XCTAssert(app.alerts.element.exists)
     }

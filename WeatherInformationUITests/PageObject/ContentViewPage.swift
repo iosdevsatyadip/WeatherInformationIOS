@@ -20,41 +20,40 @@ class ContentViewPage {
         app.textFields["cityTextField"]
     }
     
-    var launch_Navigation_bar : XCUIElement {
+    var launchNavigationBar: XCUIElement {
         app.navigationBars["Weather Information"]
     }
     
-    var settings_Navigation_bar : XCUIElement {
+    var settingsNavigationBar: XCUIElement {
         app.navigationBars["Settings"]
     }
     
-    var addCity_Navigation_bar : XCUIElement {
+    var addCityNavigationBar: XCUIElement {
         app.navigationBars["Add City"]
     }
     
-    var button_add : XCUIElement {
+    var buttonAdd: XCUIElement {
         app.buttons["Add"]
     }
     
-    var add_navigation_bar : XCUIElement {
+    var addNavigationBar: XCUIElement {
         app.navigationBars.buttons["Add"]
     }
     
-    var settings_nav_bar : XCUIElement {
+    var settingsNavBar: XCUIElement {
         app.navigationBars["Weather Information"].buttons["Settings"]
     }
     
-    var btn_save : XCUIElement {
+    var btnSave: XCUIElement {
         app.buttons["save"]
     }
     
-    var btn_settings_done : XCUIElement {
+    var btnSettingsDone: XCUIElement {
         app.navigationBars.buttons["Done"]
     }
     
-    var btn_close : XCUIElement {
+    var btnClose: XCUIElement {
         app.navigationBars.buttons["Close"]
     }
     
 }
-

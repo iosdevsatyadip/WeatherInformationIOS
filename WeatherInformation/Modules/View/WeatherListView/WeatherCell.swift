@@ -14,10 +14,10 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak private var cityNameLabel: UILabel!
     @IBOutlet weak private var temperatureLabel: UILabel!
     
-    //MARK:- Updating weather cell 
+    // MARK: Updating weather cell
     
-    func configure(_ vm: WeatherViewModel) {
-        self.cityNameLabel.text = vm.city
-        self.temperatureLabel.text = vm.temperature.formatTemperature()
+     func configure(_ weatherVM: WeatherViewModel) {
+        self.cityNameLabel.text = weatherVM.city
+        self.temperatureLabel.text = weatherVM.temperature.formatTemperature()
     }
 }

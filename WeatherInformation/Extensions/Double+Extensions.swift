@@ -10,9 +10,9 @@ import Foundation
 
 extension Double {
     
-    //MARK:- Convert temperature to specific format
+    // MARK: - convert temperature to specific format
     
     func formatTemperature() -> String {
-        return (Constants.unit() == Unit.fahrenheit.rawValue) ? String(format: "%.0f°F",self) : String(format: "%.0f°C",self)
+        return (Constants.unit() == Unit.fahrenheit.rawValue) ? String(format: "%.0f°F", self) : String(format: "%.0f°C", self)
     }
 }

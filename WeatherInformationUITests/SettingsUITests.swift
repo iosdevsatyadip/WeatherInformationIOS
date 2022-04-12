@@ -11,12 +11,10 @@ import XCTest
 
 class SettingsUITests: XCTestCase {
         
-    private var app : XCUIApplication!
+    private var app: XCUIApplication!
     private var contentViewPage: ContentViewPage!
-    var timer : Timer!
-    static let strCelcius = "Celcius"
-    static let strFahrenheit = "Fahrenheit"
-    
+    var timer: Timer!
+
     override func setUp() {
         app = XCUIApplication()
         contentViewPage = ContentViewPage(app: app)
@@ -26,36 +24,45 @@ class SettingsUITests: XCTestCase {
     }
         
     func testCelciusSelectionCellExistance() {
-        contentViewPage.settings_nav_bar.tap()
-        XCTAssert(app.tables.staticTexts[SettingsUITests.strCelcius].exists)
+        contentViewPage.settingsNavBar.tap()
+        XCTAssert(app.tables.staticTexts[Constants.celcius].exists)
+    }
+    
+    func testArbiratyChangeUnitsAndCheckNavaigationWorkStatus() {
+        contentViewPage.settingsNavBar.tap()
+        app.tables.staticTexts[Constants.celcius].tap()
+        app.tables.staticTexts[Constants.fahrenheit].tap()
+        app.tables.staticTexts[Constants.celcius].tap()
+        contentViewPage.btnSettingsDone.tap()
+        timer.wait(for: 0.5)
+        XCTAssert(contentViewPage.launchNavigationBar.exists)
     }
     
     func testFahrenheitSelectionCellExistance() {
-        contentViewPage.settings_nav_bar.tap()
-        XCTAssert(app.tables.staticTexts[SettingsUITests.strFahrenheit].exists)
+        contentViewPage.settingsNavBar.tap()
+        XCTAssert(app.tables.staticTexts[Constants.fahrenheit].exists)
     }
     
     func testAppNavigateNextScreenAfterCelciusSelectionAndDoneButtonPressed() {
-        contentViewPage.settings_nav_bar.tap()
-        app.tables.staticTexts[SettingsUITests.strCelcius].tap()
+        contentViewPage.settingsNavBar.tap()
+        app.tables.staticTexts[Constants.celcius].tap()
         timer.wait(for: 0.5)
-        contentViewPage.btn_settings_done.tap()
+        contentViewPage.btnSettingsDone.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.launch_Navigation_bar.exists)
+        XCTAssert(contentViewPage.launchNavigationBar.exists)
     }
     
     func testAppNavigateNextScreenAfterFahrenheitSelectionAndDoneButtonPressed() {
-        contentViewPage.settings_nav_bar.tap()
-        app.tables.staticTexts[SettingsUITests.strFahrenheit].tap()
+        contentViewPage.settingsNavBar.tap()
+        app.tables.staticTexts[Constants.fahrenheit].tap()
         timer.wait(for: 0.5)
-        contentViewPage.btn_settings_done.tap()
+        contentViewPage.btnSettingsDone.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.launch_Navigation_bar.exists)
+        XCTAssert(contentViewPage.launchNavigationBar.exists)
     }
     
     override func tearDown() {
         super.tearDown()
         timer = nil
     }
-        
 }

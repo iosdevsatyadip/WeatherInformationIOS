@@ -9,35 +9,34 @@
 import Foundation
 import UIKit
 import MBProgressHUD
-import Alamofire
+import Reachability
 
-protocol AddWeatherDelegate {
-    func addWeatherDidSave(vm: WeatherViewModel)
+protocol AddWeatherDelegate: AnyObject {
+    func addWeatherDidSave(weatherVM: WeatherViewModel)
 }
 
 class AddWeatherCityViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak private var cityNameTextField: UITextField!
     private var weatherService = WeatherService()
-    var delegate: AddWeatherDelegate?
-    var reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.google.com")
+    weak var delegate: AddWeatherDelegate?
+    private let reachability = try? Reachability()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    //MARK:- Testfield validation and API caling
+    // MARK: testfield validation and API caling
     
-    @IBAction func saveCityButtonPressed() {
+    @IBAction private func saveCityButtonPressed() {
         if cityNameTextField.text?.count ?? 0 > 0 {
             self.weatherApiCall()
         } else {
-            self.showAlertMessage(title: "Error!!!", message: "Please enter city name")
+            AlertHandler.showAlert(forMessage: Constants.ShowAlert.enterCityName, title: Constants.ShowAlert.alertTitle, defaultButtonTitle: Constants.ShowAlert.okTitle, sourceViewController: self)
         }
-        
     }
     
-    //MARK:-  Fetch responspe received from API
+    // MARK: fetch responspe received from API
     
     private func fetchData(city: String, completion: @escaping (Result<WeatherResponse, RequestError>) -> Void) {
         Task(priority: .background) {
@@ -46,10 +45,11 @@ class AddWeatherCityViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //MARK:-  API calling
+    // MARK: - api calling
     
-    func weatherApiCall() {
-        if reachabilityManager?.isReachable == true {
+    private func weatherApiCall() {
+        
+        if ConnectionManager.shared.hasConnectivity() {
             if let city = cityNameTextField.text {
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 fetchData(city: city) { [weak self] result in
@@ -57,45 +57,29 @@ class AddWeatherCityViewController: UIViewController, UITextFieldDelegate {
                     MBProgressHUD.hide(for: self.view, animated: true)
                     switch result {
                     case .success(let response):
-                        let vm = WeatherViewModel(weather: response)
-                        self.delegate?.addWeatherDidSave(vm: vm)
+                        let weatherVM = WeatherViewModel(weather: response)
+                        self.delegate?.addWeatherDidSave(weatherVM: weatherVM)
                         self.dismiss(animated: true, completion: nil)
                     case .failure(let error):
-                        self.showAlertMessage(title: "", message: error.customMessage)
+                        AlertHandler.showAlert(forMessage: error.customMessage, title: Constants.ShowAlert.alertTitle, defaultButtonTitle: Constants.ShowAlert.okTitle, sourceViewController: self)
                     }
                 }
             }
         } else {
-            self.showAlertMessage(title: "Error!!!", message: "Internet connection is not available")
+            AlertHandler.showAlert(forMessage: Constants.Network.errorMessage, title: Constants.Network.errorTitle, defaultButtonTitle: Constants.ShowAlert.okTitle, sourceViewController: self)
         }
     }
     
-    //MARK:- Displaying alert
+    // MARK: - close button Action
     
-    func showAlertMessage(title: String?, message: String?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-            UIAlertAction in
-        }
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    //Mark:- Close button Action 
-    
-    @IBAction func close() {
+    @IBAction private func close() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    //MARK:- Textfield delegate
+    // MARK: - textfield delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cityNameTextField.resignFirstResponder()
         return true
     }
-
 }
-
-
-
-

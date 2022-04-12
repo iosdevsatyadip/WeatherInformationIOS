@@ -9,11 +9,10 @@
 import XCTest
 @testable import WeatherInformation
 
-
 class WeatherInformationUITests: XCTestCase {
-    private var app : XCUIApplication!
+    private var app: XCUIApplication!
     private var contentViewPage: ContentViewPage!
-    var timer : Timer!
+    var timer: Timer!
     
     override func setUp() {
         app = XCUIApplication()
@@ -24,33 +23,33 @@ class WeatherInformationUITests: XCTestCase {
     }
     
     func testShouldDisplayAddCityInTitle() {
-        contentViewPage.add_navigation_bar.tap()
+        contentViewPage.addNavigationBar.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.addCity_Navigation_bar.exists)
+        XCTAssert(contentViewPage.addCityNavigationBar.exists)
     }
     
-    func testShouldDiplaySaveButton()  {
-        contentViewPage.add_navigation_bar.tap()
+    func testShouldDiplaySaveButton() {
+        contentViewPage.addNavigationBar.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.button_add.exists)
+        XCTAssert(contentViewPage.buttonAdd.exists)
     }
     
     func testCityTextFiledIsExists() {
-        contentViewPage.add_navigation_bar.tap()
+        contentViewPage.addNavigationBar.tap()
         timer.wait(for: 0.5)
         XCTAssert(contentViewPage.cityTextField.exists)
     }
     
     func testDefaultTextEntryShouldBePlaceholderTest() {
-        contentViewPage.add_navigation_bar.tap()
+        contentViewPage.addNavigationBar.tap()
         timer.wait(for: 0.5)
-        XCTAssertEqual(contentViewPage.cityTextField.value as! String, "Enter City")
+        XCTAssertEqual(contentViewPage.cityTextField.value as? String, Constants.defaultCityText)
     }
     
     func testShouldDisplaySettingsInTitle() {
-        contentViewPage.settings_nav_bar.tap()
+        contentViewPage.settingsNavBar.tap()
         timer.wait(for: 0.5)
-        XCTAssert(contentViewPage.settings_Navigation_bar.exists)
+        XCTAssert(contentViewPage.settingsNavigationBar.exists)
     }
     
     override func tearDown() {

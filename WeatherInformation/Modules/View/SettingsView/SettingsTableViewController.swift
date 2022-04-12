@@ -9,14 +9,13 @@
 import Foundation
 import UIKit
 
-protocol SettingsDelegate {
-    func settingsDone(vm: SettingsViewModel)
+protocol SettingsDelegate: AnyObject {
+    func settingsDone(settingsViewModel: SettingsViewModel)
 }
 
 class SettingsTableViewController: UITableViewController {
     
     private var settingsViewModel = SettingsViewModel()
-    let cellReuseIdentifier = "SettingsCell"
     var delegate: SettingsDelegate?
     
     override func viewDidLoad() {
@@ -24,20 +23,16 @@ class SettingsTableViewController: UITableViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    //Mark:- Update view model and dismiss view
+    // MARK: update view model and dismiss view
     
-    @IBAction func done() {
+    @IBAction private func done() {
         if let delegate = self.delegate {
-            delegate.settingsDone(vm: settingsViewModel)
+            delegate.settingsDone(settingsViewModel: settingsViewModel)
         }
         self.dismiss(animated: true, completion: nil)
     }
     
-    //Mark:- Tableview datasources and Delegates 
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    // MARK: Tableview datasources and Delegates
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -49,15 +44,8 @@ class SettingsTableViewController: UITableViewController {
             let unit = Unit.allCases[indexPath.row]
             settingsViewModel.selectedUnit = unit 
         }
+    }
         
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .none
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsViewModel.units.count
     }
@@ -65,14 +53,13 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let settingsItem = settingsViewModel.units[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cells.settingsCell, for: indexPath)
         cell.textLabel?.text = settingsItem.displayName
+        cell.accessoryType = .none
         if settingsItem == settingsViewModel.selectedUnit {
             cell.accessoryType = .checkmark
         }
         return cell
-        
     }
-    
     
 }

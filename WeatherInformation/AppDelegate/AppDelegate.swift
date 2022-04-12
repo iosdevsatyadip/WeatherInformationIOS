@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupCommonNavigationBar()
         setupDefaultSettings()
@@ -27,30 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UIBarButtonItem.appearance().tintColor = UIColor.white
     }
-    
+
     private func setupDefaultSettings() {
         let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: "unit") == nil {
-            userDefaults.set(Unit.fahrenheit.rawValue, forKey: "unit")
+        if userDefaults.value(forKey: Constants.Units.defeultName) == nil {
+            userDefaults.set(Unit.fahrenheit.rawValue, forKey: Constants.Units.defeultName)
         }
     }
-
-//    func applicationWillResignActive(_ application: UIApplication) {
-//    }
-//
-//    func applicationDidEnterBackground(_ application: UIApplication) {
-//    }
-//
-//    func applicationWillEnterForeground(_ application: UIApplication) {
-//
-//    }
-//
-//    func applicationDidBecomeActive(_ application: UIApplication) {
-//    }
-//
-//    func applicationWillTerminate(_ application: UIApplication) {
-//    }
-
-
 }
-

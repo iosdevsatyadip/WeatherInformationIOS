@@ -11,7 +11,7 @@ import XCTest
 
 class SettingsViewModelTests: XCTestCase {
 
-    private var settingsVM: SettingsViewModel!
+    private var settingsVM: SettingsViewModel?
     
     override func setUp() {
         super.setUp()
@@ -19,26 +19,27 @@ class SettingsViewModelTests: XCTestCase {
     }
     
     func testShouldReturnCorrectDisplayNameForFahrenheit() {
-        XCTAssertEqual(self.settingsVM.selectedUnit.displayName, "Fahrenheit")
+        XCTAssertEqual(self.settingsVM?.selectedUnit?.displayName, Constants.fahrenheit)
     }
     
     func testShouldMakeSureThatDefaultSelectedUnitIsFahrenheit() {
-        XCTAssertEqual(settingsVM.selectedUnit, .fahrenheit)
+        XCTAssertEqual(settingsVM?.selectedUnit, .fahrenheit)
     }
     
     func testShouldBeAbleToSaveUserUnitSelection() {
-        self.settingsVM.selectedUnit = .celsius
+        self.settingsVM?.selectedUnit = .celsius
         let userDefaults = UserDefaults.standard
-        XCTAssertNotNil(userDefaults.value(forKey: "unit"))
-        XCTAssertEqual(self.settingsVM.selectedUnit.displayName, "Celcius")
-        self.settingsVM.selectedUnit = .fahrenheit
-        XCTAssertNotNil(userDefaults.value(forKey: "unit"))
-        XCTAssertEqual(self.settingsVM.selectedUnit.displayName, "Fahrenheit")
+        XCTAssertNotNil(userDefaults.value(forKey: Constants.Units.defeultName))
+        XCTAssertEqual(self.settingsVM?.selectedUnit?.displayName, Constants.celcius)
+        self.settingsVM?.selectedUnit = .fahrenheit
+        XCTAssertNotNil(userDefaults.value(forKey: Constants.Units.defeultName))
+        XCTAssertEqual(self.settingsVM?.selectedUnit?.displayName, Constants.fahrenheit)
     }
     
     override func tearDown() {
         super.tearDown()
         let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: "unit")
+        userDefaults.removeObject(forKey: Constants.Units.defeultName)
+        self.settingsVM = nil
     }
 }

@@ -12,32 +12,31 @@ import UIKit
 class WeatherListTableViewController: UITableViewController, AddWeatherDelegate {
     
     private var weatherListViewModel = WeatherListViewModel()
-    private var lastUnitSelection: Unit!
-    let cellReuseIdentifier = "WeatherCell"
+    private var lastUnitSelection: Unit?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         let userDefaults = UserDefaults.standard
-        if let value = userDefaults.value(forKey: "unit") as? String {
-            self.lastUnitSelection = Unit(rawValue: value)!
+        if let value = userDefaults.value(forKey: Constants.Units.defeultName) as? String {
+            self.lastUnitSelection = Unit(rawValue: value)
         }
     }
     
-    //MARK:-  Update viewmodel and reload 
+    // MARK: update viewmodel and reload
     
-    func addWeatherDidSave(vm: WeatherViewModel) {
-        weatherListViewModel.addWeatherViewModel(vm)
+     func addWeatherDidSave(weatherVM: WeatherViewModel) {
+        weatherListViewModel.addWeatherViewModel(weatherVM)
         self.tableView.reloadData()
     }
-        
-    //MARK:-  Navigations
+    
+    // MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddWeatherCityViewController" {
+        if segue.identifier == Constants.SegueIdentifier.segueAddWeatherCityVC {
             prepareSegueForAddWeatherCityViewController(segue: segue)
-        } else if segue.identifier == "SettingsTableViewController" {
+        } else if segue.identifier == Constants.SegueIdentifier.segueSettingsettingsTableViewController {
             prepareSegueForSettingsTableViewController(segue: segue)
         }
     }
@@ -48,21 +47,16 @@ class WeatherListTableViewController: UITableViewController, AddWeatherDelegate 
         settingsTVC?.delegate = self
     }
     
-    
-    func prepareSegueForAddWeatherCityViewController(segue: UIStoryboardSegue) {
+    private func prepareSegueForAddWeatherCityViewController(segue: UIStoryboardSegue) {
         let nav = segue.destination as? UINavigationController
         let addWeatherCityVC = nav?.viewControllers.first as? AddWeatherCityViewController
         addWeatherCityVC?.delegate = self
     }
     
-    //MARK:- Tableview DataSources
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    // MARK: tableview DataSources
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return Constants.tableViewRowHeight
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +64,10 @@ class WeatherListTableViewController: UITableViewController, AddWeatherDelegate 
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! WeatherCell? else { fatalError() }
+        
+        guard let cell: WeatherCell = tableView.dequeueReusableCell(withIdentifier: Constants.Cells.weatherCell, for: indexPath) as?  WeatherCell else {
+            return UITableViewCell()
+        }
         let weatherVM = weatherListViewModel.modelAt(indexPath.row)
         cell.configure(weatherVM)
         return cell
@@ -80,12 +77,12 @@ class WeatherListTableViewController: UITableViewController, AddWeatherDelegate 
 
 extension WeatherListTableViewController: SettingsDelegate {
     
-    //MARK:- Updating unit and respective value and update UI
+    // MARK: updating unit and respective value and update UI
     
-    func settingsDone(vm: SettingsViewModel) {
-        if lastUnitSelection.rawValue != vm.selectedUnit.rawValue {
-            weatherListViewModel.updateUnit(to: vm.selectedUnit)
-            lastUnitSelection = Unit(rawValue: vm.selectedUnit.rawValue) ?? Unit.fahrenheit
+     func settingsDone(settingsViewModel settingsVM: SettingsViewModel) {
+        if lastUnitSelection?.rawValue != settingsVM.selectedUnit?.rawValue {
+            weatherListViewModel.updateUnit(to: settingsVM.selectedUnit ?? Unit.fahrenheit)
+            lastUnitSelection = Unit(rawValue: settingsVM.selectedUnit?.rawValue ?? Unit.fahrenheit.rawValue) ?? Unit.fahrenheit
             tableView.reloadData()
         }
     }
