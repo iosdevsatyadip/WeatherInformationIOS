@@ -1,11 +1,10 @@
 # WeatherInformation
 
-**WeatherInformation** is a simple iPhone application which allows user to input city as per choice and App will display current temperature of that city. By default app will display temperature in Fahrenheit and user can also chagne mode of temperature from settings screen.
+**WeatherInformation** is a simple iPhone application which allows user to input city as per choice and App will display current temperature of that city. By default app will display temperature in Fahrenheit mode and user can chagne mode of temperature from settings screen.
 
 WeatherInformation Application has been developed in Swift 5, following MVVM design pattern and Test-driven development approach.  Used **OpenWeatherMap** API to get current weather information. Below screenshots shows Application structure and testcase results. 
 
-
-<img width="1135" alt="Screenshot 2022-04-12 at 9 40 59 PM" src="https://user-images.githubusercontent.com/103521381/163006864-08b9cb8b-2958-4121-8ad3-ae289d453499.png">
+<img width="1139" alt="Screenshot 2022-04-13 at 10 01 14 AM" src="https://user-images.githubusercontent.com/103521381/163100595-dadf3b2c-805a-4186-99ee-4e036c95e13e.png">
 
  
 ## Supported version
@@ -19,8 +18,8 @@ WeatherInformation Application has been developed in Swift 5, following MVVM des
 1) Clone the repository
 $ git clone https://github.com/iosdevsatyadip/WeatherInformationIOS.git
 2) Open Terminal and move to project location by cd command 
-3) install pod 
-5) After successfully pod install  open **WeatherInformation.xcworkspace** file and run iPhone device / simulator (iOS 15 onwards)
+3) pod install (Install pod using this command) 
+5) After successfully pod installation  open **WeatherInformation.xcworkspace** file and run on iPhone device / simulator (iOS 15 onwards)
 
 ## Key Swift Features
 
@@ -65,4 +64,4 @@ Network connection error
 
 
 ## Notes 
-WeatherInformation application is tested in iPhone simulator (iOS 15.2) portrait mode only and not tested in real device. 
+WeatherInformation application is tested in iPhone simulator (iOS 15.2) and not tested in real device. WeatherInformation application supports portrait mode only. 
